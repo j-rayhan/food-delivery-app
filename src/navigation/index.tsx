@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { RootStackParamList } from '../constants/types';
-
+import BottomTab from './BottomTabNavigator';
 import { Home, Restaurant, OrderDelivery} from '../screens';
 
 export default function Navigation() {
@@ -20,7 +20,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home">
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Home" component={BottomTab} />
       <Stack.Screen name="Restaurant" component={Restaurant} />
       <Stack.Screen name="OrderDelivery" component={OrderDelivery} />
     </Stack.Navigator>
