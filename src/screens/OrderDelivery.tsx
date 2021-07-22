@@ -1,14 +1,21 @@
 import * as React from 'react';
-import {View, Text} from 'react-native';
+import { StackScreenProps } from "@react-navigation/stack";
+import { View, Text, TouchableOpacity } from 'react-native';
+import { styles } from '../styles';
+import { RootStackParamList } from '../constants/types';
 
-const OrderDelivery: React.FC<{title: string}> = ({title}) => {
-   return (
-       <View>
-           <Text>
-             Edit {title}.tsx to change this screen.
-           </Text>
-       </View>
-   );
+const OrderDelivery = ({ navigation }: StackScreenProps<RootStackParamList, "OrderDelivery">) => {
+  return (
+    <View style={[styles.container, styles.center]}>
+      <Text>
+        Edit OrderDelivery.tsx to change this screen.
+      </Text>
+
+      <TouchableOpacity onPress={() => navigation.replace('Home')}>
+        <Text>Go to Home</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export default OrderDelivery;

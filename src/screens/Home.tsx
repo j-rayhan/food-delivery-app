@@ -1,9 +1,13 @@
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
+import { StackScreenProps } from "@react-navigation/stack";
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { icons } from '../constants';
 import { styles } from '../styles';
+import { RootStackParamList } from '../constants/types';
 
-const Home: React.FC<{ title: string }> = ({ title }) => {
+const Home = ({
+  navigation,
+}: StackScreenProps<RootStackParamList, "Home">) => {
   return (
     <View style={[styles.container, styles.center]}>
       <Image
@@ -15,8 +19,11 @@ const Home: React.FC<{ title: string }> = ({ title }) => {
         }}
       />
       <Text>
-        Edit {title}.tsx to change this screen.
-           </Text>
+        Edit Home.tsx to change this screen.
+      </Text>
+      <TouchableOpacity onPress={() => navigation.replace('Restaurant')}>
+        <Text>Go to Restaurant</Text>
+      </TouchableOpacity>
     </View>
   );
 };
