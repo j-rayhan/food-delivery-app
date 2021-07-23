@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {FONTS, icons} from '../../constants';
+import {initialCurrentLocation} from '../../constants/data';
 import {styles} from '../../styles';
 
 const Header: React.FC<any> = () => {
@@ -15,7 +16,7 @@ const Header: React.FC<any> = () => {
       </TouchableOpacity>
       <View style={[styles.container, styles.center]}>
         <View style={[styles.center, styles.homeHCLocation]}>
-          <Text style={{...FONTS.h3}}>Location</Text>
+          <Text style={{...FONTS.h3}}>{initialCurrentLocation.streetName}</Text>
         </View>
       </View>
       <TouchableOpacity style={styles.homeHCRIcon}>
