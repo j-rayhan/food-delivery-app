@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,8 +26,10 @@ const styles = StyleSheet.create({
   spaceEvenly: {
     justifyContent: 'space-evenly',
   },
+  iconSize: {
+    width: 25,
+    height: 25,
+  },
 });
 
-export {
-  styles
-}
+export {styles};
