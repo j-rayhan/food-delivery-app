@@ -114,7 +114,6 @@
 				DA56793656CD7421E76C59FC /* Pods-FoodDeliveryApp-FoodDeliveryAppTests.debug.xcconfig */,
 				27F002424AFCA6BD274D5DD1 /* Pods-FoodDeliveryApp-FoodDeliveryAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

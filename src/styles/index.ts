@@ -31,6 +31,14 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
+  tabBarContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 30,
+    backgroundColor: COLORS.white,
+  },
   svgTabContainer: {flexDirection: 'row', position: 'absolute', top: 0},
   svgTabButton: {
     top: -22.5,

@@ -3,8 +3,12 @@ import {Image, TouchableOpacity, View} from 'react-native';
 import {
   createBottomTabNavigator,
   BottomTabBarButtonProps,
+  BottomTabBar,
+  BottomTabBarProps,
 } from '@react-navigation/bottom-tabs';
 import Svg, {Path} from 'react-native-svg';
+import {isIphoneX} from 'react-native-iphone-x-helper';
+
 import {COLORS, icons} from '../constants';
 import {Home} from '../screens';
 import {BottomTabParamList} from '../constants/types';
@@ -19,11 +23,16 @@ export default function BottomTabNavigator() {
       tabBarOptions={{
         showLabel: false,
         style: {
+          position: 'absolute',
+          left: 0,
+          bottom: 0,
+          right: 0,
           borderTopWidth: 0,
           backgroundColor: 'transparent',
           elevation: 0,
         },
-      }}>
+      }}
+      tabBar={props => <TabBarX {...props} />}>
       <BottomTab.Screen
         name="Home"
         component={Home}
@@ -119,5 +128,19 @@ const TabButtonX = ({
         {children}
       </TouchableOpacity>
     );
+  }
+};
+
+const TabBarX = (props: BottomTabBarProps) => {
+  if (isIphoneX()) {
+    return (
+      <View>
+        <View style={styles.tabBarContainer}>
+          <BottomTabBar {...props} />
+        </View>
+      </View>
+    );
+  } else {
+    return <BottomTabBar {...props} />;
   }
 };
