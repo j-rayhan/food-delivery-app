@@ -1,19 +1,15 @@
 import * as React from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {icons} from '../constants';
+import {SafeAreaView} from 'react-native';
 import {styles} from '../styles';
 import {RootStackParamList} from '../constants/types';
+import Header from '../container/home/Header';
 
-const Home = ({navigation}: StackScreenProps<RootStackParamList, 'Home'>) => {
+const Home = ({}: StackScreenProps<RootStackParamList, 'Home'>) => {
   return (
-    <View style={[styles.container, styles.center]}>
-      <Image source={icons.car} resizeMode="contain" style={styles.iconSize} />
-      <Text>Edit Home.tsx to change this screen.</Text>
-      <TouchableOpacity onPress={() => navigation.replace('Restaurant')}>
-        <Text>Go to Restaurant</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Header />
+    </SafeAreaView>
   );
 };
 

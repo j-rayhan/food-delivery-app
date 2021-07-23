@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
-import {COLORS} from '../constants';
+import {COLORS, SIZES} from '../constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.lightGray4,
   },
   row: {
     flexDirection: 'row',
@@ -50,6 +51,28 @@ const styles = StyleSheet.create({
   tabButton: {
     height: 60,
     backgroundColor: COLORS.white,
+  },
+  // home screen styles
+  headerContainer: {flexDirection: 'row', height: 50},
+  homeHCLIcon: {
+    width: 50,
+    paddingLeft: SIZES.padding * 2,
+    justifyContent: 'center',
+  },
+  homeHCRIcon: {
+    width: 50,
+    paddingRight: SIZES.padding * 2,
+    justifyContent: 'center',
+  },
+  homeHCISize: {
+    width: 30,
+    height: 30,
+  },
+  homeHCLocation: {
+    width: '70%',
+    height: '100%',
+    backgroundColor: COLORS.lightGray3,
+    borderRadius: SIZES.radius,
   },
 });
 
