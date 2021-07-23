@@ -1,8 +1,11 @@
 import * as React from 'react';
-import {Image} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Image, TouchableOpacity, View} from 'react-native';
+import {
+  createBottomTabNavigator,
+  BottomTabBarButtonProps,
+} from '@react-navigation/bottom-tabs';
+import Svg, {Path} from 'react-native-svg';
 import {COLORS, icons} from '../constants';
-
 import {Home} from '../screens';
 import {BottomTabParamList} from '../constants/types';
 import {styles} from '../styles';
@@ -15,6 +18,11 @@ export default function BottomTabNavigator() {
       initialRouteName="Home"
       tabBarOptions={{
         showLabel: false,
+        style: {
+          borderTopWidth: 0,
+          backgroundColor: 'transparent',
+          elevation: 0,
+        },
       }}>
       <BottomTab.Screen
         name="Home"
@@ -23,6 +31,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({focused}) => (
             <TabBarIcon name={icons.cutlery} active={focused} />
           ),
+          tabBarButton: props => <TabButtonX {...props} />,
         }}
       />
       <BottomTab.Screen
@@ -32,6 +41,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({focused}) => (
             <TabBarIcon name={icons.search} active={focused} />
           ),
+          tabBarButton: props => <TabButtonX {...props} />,
         }}
       />
       <BottomTab.Screen
@@ -41,6 +51,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({focused}) => (
             <TabBarIcon name={icons.like} active={focused} />
           ),
+          tabBarButton: props => <TabButtonX {...props} />,
         }}
       />
       <BottomTab.Screen
@@ -50,14 +61,13 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({focused}) => (
             <TabBarIcon name={icons.user} active={focused} />
           ),
+          tabBarButton: props => <TabButtonX {...props} />,
         }}
       />
     </BottomTab.Navigator>
   );
 }
 
-// You can explore the built-in icon families and icons on the web at:
-// https://icons.expo.fyi/
 const TabBarIcon = (props: {
   name: React.ComponentProps<typeof Image>['source'];
   active: boolean;
@@ -74,32 +84,40 @@ const TabBarIcon = (props: {
   );
 };
 
-// // Each tab has its own navigation stack, you can read more about this pattern here:
-// // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-// const TabOneStack = createStackNavigator<TabOneParamList>();
-
-// function TabOneNavigator() {
-//   return (
-//     <TabOneStack.Navigator>
-//       <TabOneStack.Screen
-//         name="TabOneScreen"
-//         component={TabOneScreen}
-//         options={{ headerShown: false }}
-//       />
-//     </TabOneStack.Navigator>
-//   );
-// }
-
-// const TabTwoStack = createStackNavigator<TabTwoParamList>();
-
-// function TabTwoNavigator() {
-//   return (
-//     <TabTwoStack.Navigator>
-//       <TabTwoStack.Screen
-//         name="TabTwoScreen"
-//         component={TabTwoScreen}
-//         options={{ headerShown: false }}
-//       />
-//     </TabTwoStack.Navigator>
-//   );
-// }
+const TabButtonX = ({
+  accessibilityState,
+  children,
+  onPress,
+}: BottomTabBarButtonProps) => {
+  const isSelected = accessibilityState?.selected;
+  if (isSelected) {
+    return (
+      <View style={[styles.container, styles.center]}>
+        <View style={styles.svgTabContainer}>
+          <View style={{...styles.container, backgroundColor: COLORS.white}} />
+          <Svg width={75} height={61} viewBox="0 0 75 61">
+            <Path
+              fill={COLORS.white}
+              d="M75.2 0v61H0V0c4.1 0 7.4 3.1 7.9 7.1C10 21.7 22.5 33 37.7 33c15.2 0 27.7-11.3 29.7-25.9.5-4 3.9-7.1 7.9-7.1h-.1z"
+            />
+          </Svg>
+          <View style={{...styles.container, backgroundColor: COLORS.white}} />
+        </View>
+        <TouchableOpacity
+          onPress={onPress}
+          style={[styles.center, styles.svgTabButton]}>
+          {children}
+        </TouchableOpacity>
+      </View>
+    );
+  } else {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        activeOpacity={1}
+        style={[styles.container, styles.tabButton]}>
+        {children}
+      </TouchableOpacity>
+    );
+  }
+};
