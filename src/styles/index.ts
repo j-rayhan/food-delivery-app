@@ -38,6 +38,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 1,
   },
+  iconSize20: {
+    width: 20,
+    height: 20,
+  },
   iconSize: {
     width: 25,
     height: 25,
@@ -89,6 +93,20 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     backgroundColor: COLORS.white,
+  },
+  homeRestaurantCover: {
+    width: '100%',
+    height: 200,
+    borderRadius: SIZES.radius,
+  },
+  duration: {
+    position: 'absolute',
+    bottom: 0,
+    height: 50,
+    width: SIZES.width * 0.3,
+    backgroundColor: COLORS.white,
+    borderTopRightRadius: SIZES.radius,
+    borderBottomLeftRadius: SIZES.radius,
   },
 });
 

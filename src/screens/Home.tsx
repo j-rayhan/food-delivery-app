@@ -9,7 +9,7 @@ import {
 } from '../constants/types';
 import Header from '../container/home/Header';
 import MainCategory from '../container/home/MainCategory';
-import {restaurantData} from '../constants/data';
+import {categoryData, restaurantData} from '../constants/data';
 import Restaurants from '../container/home/Restaurants';
 
 const Home = ({}: StackScreenProps<RootStackParamList, 'Home'>) => {
@@ -23,6 +23,15 @@ const Home = ({}: StackScreenProps<RootStackParamList, 'Home'>) => {
     setSelectedRestaurant(res);
     setSelectedCategory(category);
   };
+  const getCategoryName = (id: number) => {
+    const category = categoryData.filter(c => c.id === id);
+
+    if (category.length > 0) {
+      return category[0].name;
+    }
+
+    return '';
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Header />
@@ -31,7 +40,10 @@ const Home = ({}: StackScreenProps<RootStackParamList, 'Home'>) => {
         handleSelectCategory={handleSelectCategory}
         selectedCategory={selectedCategory}
       />
-      <Restaurants data={selectedRestaurant} />
+      <Restaurants
+        data={selectedRestaurant}
+        getCategoryName={getCategoryName}
+      />
     </SafeAreaView>
   );
 };
