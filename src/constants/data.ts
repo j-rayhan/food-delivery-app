@@ -1,4 +1,5 @@
 import {icons, images} from '.';
+import {CategoryType} from './types';
 
 export const initialCurrentLocation = {
   streetName: 'Dhaka',
@@ -8,7 +9,7 @@ export const initialCurrentLocation = {
   },
 };
 
-export const categoryData = [
+export const categoryData: CategoryType[] = [
   {
     id: 1,
     name: 'Rice',

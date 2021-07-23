@@ -28,6 +28,16 @@ const styles = StyleSheet.create({
   spaceEvenly: {
     justifyContent: 'space-evenly',
   },
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 1,
+  },
   iconSize: {
     width: 25,
     height: 25,
@@ -73,6 +83,12 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: COLORS.lightGray3,
     borderRadius: SIZES.radius,
+  },
+  menuIcon: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: COLORS.white,
   },
 });
 

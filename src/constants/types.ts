@@ -1,3 +1,6 @@
+import {Image} from 'react-native';
+import {restaurantData} from './data';
+
 export type RootStackParamList = {
   NotFound: undefined;
   Home: undefined;
@@ -15,3 +18,11 @@ export type BottomTabParamList = {
 export type HomeTabParamList = {
   HomeTabScreen: undefined;
 };
+
+export type CategoryType = {
+  id: number;
+  name: string;
+  icon: React.ComponentProps<typeof Image>['source'];
+};
+
+export type RestaurantType = typeof restaurantData[1];
