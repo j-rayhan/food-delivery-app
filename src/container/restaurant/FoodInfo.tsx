@@ -4,8 +4,9 @@ import {COLORS, FONTS, icons, SIZES} from '../../constants';
 import {RestaurantType} from '../../constants/types';
 import {styles} from '../../styles';
 
-const FoodInfo: React.FC<{restaurant: RestaurantType | null}> = ({
+const FoodInfo: React.FC<{restaurant: RestaurantType | null; scrollX: any}> = ({
   restaurant,
+  scrollX,
 }) => {
   return (
     <Animated.ScrollView
@@ -13,7 +14,10 @@ const FoodInfo: React.FC<{restaurant: RestaurantType | null}> = ({
       pagingEnabled
       scrollEventThrottle={16}
       snapToAlignment="center"
-      showsHorizontalScrollIndicator={false}>
+      showsHorizontalScrollIndicator={false}
+      onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}], {
+        useNativeDriver: false,
+      })}>
       {restaurant?.menu?.map((item, index) => (
         <View key={`restaurant-menu-${index}`} style={{alignItems: 'center'}}>
           <View style={{height: SIZES.height * 0.35}}>

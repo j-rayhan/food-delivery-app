@@ -53,9 +53,9 @@ const Restaurants: React.FC<{
           <Text style={{...FONTS.body3}}>{item.rating}</Text>
           {/* Categories label */}
           <View style={[styles.row, {marginLeft: SIZES.padding}]}>
-            {item?.categories?.map(categoryId => {
+            {item?.categories?.map((categoryId, index) => {
               return (
-                <View style={styles.row} key={categoryId}>
+                <View style={styles.row} key={`category-menu-${index}`}>
                   <Text style={{...FONTS.body3}}>
                     {getCategoryName(categoryId)}
                   </Text>
@@ -66,6 +66,7 @@ const Restaurants: React.FC<{
             {/* Price */}
             {[1, 2, 3].map(price => (
               <Text
+                key={price}
                 style={{
                   ...FONTS.body3,
                   color:
