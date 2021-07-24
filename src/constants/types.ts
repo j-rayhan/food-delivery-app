@@ -28,4 +28,10 @@ export type CategoryType = {
   icon: React.ComponentProps<typeof Image>['source'];
 };
 
+export type OrderItemType = {
+  menuId: number;
+  quantity: number;
+  price: number;
+  total: number;
+};
 export type RestaurantType = typeof restaurantData[1];

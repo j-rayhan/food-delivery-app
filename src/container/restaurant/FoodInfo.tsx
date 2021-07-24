@@ -4,10 +4,12 @@ import {COLORS, FONTS, icons, SIZES} from '../../constants';
 import {RestaurantType} from '../../constants/types';
 import {styles} from '../../styles';
 
-const FoodInfo: React.FC<{restaurant: RestaurantType | null; scrollX: any}> = ({
-  restaurant,
-  scrollX,
-}) => {
+const FoodInfo: React.FC<{
+  restaurant: RestaurantType | null;
+  scrollX: any;
+  handleOrder: (action: string, menuId: number, price: number) => void;
+  getOrderQty: (menuId: number) => number;
+}> = ({restaurant, scrollX, handleOrder, getOrderQty}) => {
   return (
     <Animated.ScrollView
       horizontal
@@ -41,6 +43,7 @@ const FoodInfo: React.FC<{restaurant: RestaurantType | null; scrollX: any}> = ({
                 flexDirection: 'row',
               }}>
               <TouchableOpacity
+                onPress={() => handleOrder('-', item.menuId, item.price)}
                 style={[
                   styles.center,
                   {
@@ -60,9 +63,10 @@ const FoodInfo: React.FC<{restaurant: RestaurantType | null; scrollX: any}> = ({
                     backgroundColor: COLORS.white,
                   },
                 ]}>
-                <Text style={{...FONTS.h2}}>3</Text>
+                <Text style={{...FONTS.h2}}>{getOrderQty(item.menuId)}</Text>
               </View>
               <TouchableOpacity
+                onPress={() => handleOrder('+', item.menuId, item.price)}
                 style={[
                   styles.center,
                   {
