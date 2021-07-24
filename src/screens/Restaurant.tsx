@@ -4,6 +4,7 @@ import {SafeAreaView} from 'react-native';
 import {styles} from '../styles';
 import {RestaurantType, RootStackParamList} from '../constants/types';
 import Header from '../container/restaurant/Header';
+import FoodInfo from '../container/restaurant/FoodInfo';
 // import {initialCurrentLocation} from '../constants/data';
 
 const Restaurant = ({
@@ -24,6 +25,7 @@ const Restaurant = ({
   return (
     <SafeAreaView style={styles.container}>
       <Header restaurantName={restaurant?.name} />
+      <FoodInfo restaurant={restaurant} />
     </SafeAreaView>
   );
 };
