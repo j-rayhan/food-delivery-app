@@ -1,10 +1,13 @@
 import {Image} from 'react-native';
-import {restaurantData} from './data';
+import {initialCurrentLocation, restaurantData} from './data';
 
 export type RootStackParamList = {
   NotFound: undefined;
   Home: undefined;
-  Restaurant: undefined;
+  Restaurant: {
+    item: RestaurantType;
+    currentLocation: typeof initialCurrentLocation;
+  };
   OrderDelivery: undefined;
 };
 

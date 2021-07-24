@@ -1,20 +1,30 @@
 import * as React from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {styles} from '../styles';
-import {RootStackParamList} from '../constants/types';
+import {RestaurantType, RootStackParamList} from '../constants/types';
+import Header from '../container/restaurant/Header';
+// import {initialCurrentLocation} from '../constants/data';
 
 const Restaurant = ({
-  navigation,
+  route,
 }: StackScreenProps<RootStackParamList, 'Restaurant'>) => {
-  return (
-    <View style={[styles.container, styles.center]}>
-      <Text>Edit Restaurant.tsx to change this screen.</Text>
+  // const [location, setLocation] = React.useState<
+  //   typeof initialCurrentLocation | undefined
+  // >(undefined);
+  const [restaurant, setRestaurant] = React.useState<RestaurantType | null>(
+    null,
+  );
 
-      <TouchableOpacity onPress={() => navigation.replace('OrderDelivery')}>
-        <Text>Go to Order Delivery</Text>
-      </TouchableOpacity>
-    </View>
+  React.useLayoutEffect(() => {
+    const {item} = route.params;
+    // setLocation(currentLocation);
+    setRestaurant(item);
+  }, [route]);
+  return (
+    <SafeAreaView style={styles.container}>
+      <Header restaurantName={restaurant?.name} />
+    </SafeAreaView>
   );
 };
 
