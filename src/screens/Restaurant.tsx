@@ -55,6 +55,15 @@ const Restaurant = ({
       return 0;
     }
   };
+  const getBasketItem = React.useMemo(
+    () => orderItems.reduce((a, b) => a + (b.quantity ?? 0), 0),
+    [orderItems],
+  );
+
+  const sumOrder = React.useMemo(
+    () => orderItems.reduce((a, b) => a + (b.total ?? 0), 0),
+    [orderItems],
+  );
   return (
     <SafeAreaView style={styles.container}>
       <Header restaurantName={restaurant?.name} />
@@ -64,7 +73,12 @@ const Restaurant = ({
         handleOrder={handleOrder}
         getOrderQty={getOrderQty}
       />
-      <Order scrollX={scrollX} restaurant={restaurant} />
+      <Order
+        scrollX={scrollX}
+        restaurant={restaurant}
+        getBasketItem={getBasketItem}
+        sumOrder={sumOrder}
+      />
     </SafeAreaView>
   );
 };

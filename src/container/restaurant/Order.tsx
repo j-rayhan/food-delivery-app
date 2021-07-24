@@ -1,24 +1,29 @@
+import {useNavigation} from '@react-navigation/core';
 import * as React from 'react';
 import {View, Animated, Text, Image, TouchableOpacity} from 'react-native';
 import {isIphoneX} from 'react-native-iphone-x-helper';
 import {COLORS, FONTS, icons, SIZES} from '../../constants';
+import {initialCurrentLocation} from '../../constants/data';
 import {RestaurantType} from '../../constants/types';
 import {styles} from '../../styles';
 
-const Order: React.FC<{scrollX: any; restaurant: RestaurantType | null}> = ({
-  scrollX,
-  restaurant,
-}) => {
+const Order: React.FC<{
+  scrollX: any;
+  restaurant: RestaurantType | null;
+  getBasketItem: number;
+  sumOrder: number;
+}> = ({scrollX, restaurant, getBasketItem, sumOrder}) => {
+  const navigation = useNavigation();
   const renderDots = () => {
     const dotPosition = Animated.divide(scrollX, SIZES.width);
     return (
-      <View style={{height: 30}}>
+      <View style={{height: SIZES.padding * 3}}>
         <View
           style={[
             styles.row,
             styles.center,
             {
-              height: SIZES.padding2,
+              height: SIZES.padding,
             },
           ]}>
           {restaurant?.menu?.map((item, index) => {
@@ -47,7 +52,7 @@ const Order: React.FC<{scrollX: any; restaurant: RestaurantType | null}> = ({
                   width: dotSize,
                   height: dotSize,
                   backgroundColor: dotColor,
-                  marginHorizontal: 6,
+                  marginHorizontal: SIZES.padding2 / 2,
                   borderRadius: SIZES.radius,
                 }}
               />
@@ -62,53 +67,57 @@ const Order: React.FC<{scrollX: any; restaurant: RestaurantType | null}> = ({
       {renderDots()}
       <View
         style={{
-          borderTopLeftRadius: 40,
-          borderTopRightRadius: 40,
+          borderTopLeftRadius: SIZES.padding * 4,
+          borderTopRightRadius: SIZES.padding * 4,
           backgroundColor: COLORS.white,
         }}>
         <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingVertical: SIZES.padding * 2,
-            paddingHorizontal: SIZES.padding * 3,
-            borderBottomWidth: 1,
-            borderBottomColor: COLORS.lightGray2,
-          }}>
-          <Text style={{...FONTS.h3}}>item. in cart</Text>
-          <Text style={{...FONTS.h3}}>$45</Text>
+          style={[
+            styles.rowSpread,
+            {
+              paddingVertical: SIZES.padding * 2,
+              paddingHorizontal: SIZES.padding * 3,
+              borderBottomWidth: SIZES.padding * 0.1,
+              borderBottomColor: COLORS.lightGray2,
+            },
+          ]}>
+          <Text style={{...FONTS.h3}}>{getBasketItem} items in cart</Text>
+          <Text style={{...FONTS.h3}}>${sumOrder}</Text>
         </View>
         <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingVertical: SIZES.padding * 2,
-            paddingHorizontal: SIZES.padding * 3,
-          }}>
-          <View style={{flexDirection: 'row'}}>
+          style={[
+            styles.rowSpread,
+            {
+              paddingVertical: SIZES.padding * 2,
+              paddingHorizontal: SIZES.padding * 3,
+            },
+          ]}>
+          <View style={styles.row}>
             <Image
               source={icons.pin}
               resizeMode="contain"
-              style={{
-                width: 20,
-                height: 20,
-                tintColor: COLORS.darkgray,
-              }}
+              style={[
+                styles.iconSize20,
+                {
+                  tintColor: COLORS.darkgray,
+                },
+              ]}
             />
             <Text style={{...FONTS.h4, marginLeft: SIZES.padding}}>
               Location
             </Text>
           </View>
 
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={styles.row}>
             <Image
               source={icons.master_card}
               resizeMode="contain"
-              style={{
-                width: 20,
-                height: 20,
-                tintColor: COLORS.darkgray,
-              }}
+              style={[
+                styles.iconSize20,
+                {
+                  tintColor: COLORS.darkgray,
+                },
+              ]}
             />
             <Text style={{...FONTS.h4, marginLeft: SIZES.padding}}>8888</Text>
           </View>
@@ -116,27 +125,28 @@ const Order: React.FC<{scrollX: any; restaurant: RestaurantType | null}> = ({
         {/* Order button */}
         <View style={[styles.center, {padding: SIZES.padding * 2}]}>
           <TouchableOpacity
-            style={{
-              width: SIZES.width * 0.9,
-              padding: SIZES.padding,
-              backgroundColor: COLORS.primary,
-              alignItems: 'center',
-              borderRadius: SIZES.radius,
-            }}>
+            onPress={() =>
+              navigation.navigate('OrderDelivery', {
+                restaurant,
+                currentLocation: initialCurrentLocation,
+              })
+            }
+            style={[
+              styles.alignCenter,
+              {
+                width: SIZES.width * 0.9,
+                padding: SIZES.padding,
+                backgroundColor: COLORS.primary,
+                borderRadius: SIZES.radius,
+              },
+            ]}>
             <Text style={{...FONTS.h2, color: COLORS.white}}>Order</Text>
           </TouchableOpacity>
         </View>
       </View>
       {isIphoneX() && (
         <View
-          style={{
-            position: 'absolute',
-            bottom: -30,
-            left: 0,
-            right: 0,
-            height: 30,
-            backgroundColor: COLORS.white,
-          }}
+          style={[styles.tabBarContainer, {bottom: -(SIZES.padding * 3)}]}
         />
       )}
     </View>

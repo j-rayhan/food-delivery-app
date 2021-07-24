@@ -8,7 +8,10 @@ export type RootStackParamList = {
     item: RestaurantType;
     currentLocation: typeof initialCurrentLocation;
   };
-  OrderDelivery: undefined;
+  OrderDelivery: {
+    restaurant: RestaurantType;
+    currentLocation: typeof initialCurrentLocation;
+  };
 };
 
 export type BottomTabParamList = {

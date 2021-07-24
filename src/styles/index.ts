@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   justifyCenter: {
     justifyContent: 'center',
   },
+  alignCenter: {alignItems: 'center'},
   spaceBetween: {
     justifyContent: 'space-between',
   },
@@ -107,6 +108,19 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderTopRightRadius: SIZES.radius,
     borderBottomLeftRadius: SIZES.radius,
+  },
+  // Restaurant screen
+  restaurantMenuPhoto: {
+    width: SIZES.width,
+    height: '100%',
+  },
+  quantityContainer: {
+    position: 'absolute',
+    bottom: -20,
+    width: SIZES.width,
+    height: 50,
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
 });
 

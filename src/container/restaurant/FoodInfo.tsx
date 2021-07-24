@@ -21,33 +21,22 @@ const FoodInfo: React.FC<{
         useNativeDriver: false,
       })}>
       {restaurant?.menu?.map((item, index) => (
-        <View key={`restaurant-menu-${index}`} style={{alignItems: 'center'}}>
+        <View key={`restaurant-menu-${index}`} style={styles.alignCenter}>
           <View style={{height: SIZES.height * 0.35}}>
             {/* Image */}
             <Image
               source={item.photo}
               resizeMode="cover"
-              style={{
-                width: SIZES.width,
-                height: '100%',
-              }}
+              style={styles.restaurantMenuPhoto}
             />
             {/* Quantity */}
-            <View
-              style={{
-                position: 'absolute',
-                bottom: -20,
-                width: SIZES.width,
-                height: 50,
-                justifyContent: 'center',
-                flexDirection: 'row',
-              }}>
+            <View style={styles.quantityContainer}>
               <TouchableOpacity
                 onPress={() => handleOrder('-', item.menuId, item.price)}
                 style={[
                   styles.center,
                   {
-                    width: 50,
+                    width: SIZES.padding * 5,
                     backgroundColor: COLORS.white,
                     borderTopLeftRadius: SIZES.radius,
                     borderBottomLeftRadius: SIZES.radius,
@@ -59,7 +48,7 @@ const FoodInfo: React.FC<{
                 style={[
                   styles.center,
                   {
-                    width: 50,
+                    width: SIZES.padding * 5,
                     backgroundColor: COLORS.white,
                   },
                 ]}>
@@ -70,7 +59,7 @@ const FoodInfo: React.FC<{
                 style={[
                   styles.center,
                   {
-                    width: 50,
+                    width: SIZES.padding * 5,
                     backgroundColor: COLORS.white,
                     borderTopRightRadius: SIZES.radius,
                     borderBottomRightRadius: SIZES.radius,
@@ -83,9 +72,9 @@ const FoodInfo: React.FC<{
           {/* Name & description */}
           <View
             style={[
+              styles.alignCenter,
               {
                 width: SIZES.width,
-                alignItems: 'center',
                 marginTop: SIZES.padding * 1.5,
                 paddingHorizontal: SIZES.padding * 2,
               },
@@ -93,8 +82,8 @@ const FoodInfo: React.FC<{
             <Text
               style={{
                 marginVertical: SIZES.padding,
-                textAlign: 'center',
                 ...FONTS.h2,
+                ...FONTS.center,
               }}>
               {item.name} - {item.price.toFixed(2)}
             </Text>
@@ -103,19 +92,20 @@ const FoodInfo: React.FC<{
           {/* Calories */}
           <View
             style={[
+              styles.row,
               {
-                flexDirection: 'row',
                 marginTop: SIZES.padding,
               },
             ]}>
             <Image
               source={icons.fire}
               resizeMode="contain"
-              style={{
-                width: 20,
-                height: 20,
-                marginRight: SIZES.padding,
-              }}
+              style={[
+                styles.iconSize20,
+                {
+                  marginRight: SIZES.padding,
+                },
+              ]}
             />
             <Text style={{...FONTS.body3, color: COLORS.darkgray}}>
               {item.calories.toFixed(2)} cal
