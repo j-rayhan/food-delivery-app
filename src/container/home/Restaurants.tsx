@@ -1,6 +1,8 @@
+import { useNavigation } from '@react-navigation/core';
 import * as React from 'react';
 import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
 import {COLORS, FONTS, icons, SIZES} from '../../constants';
+import { initialCurrentLocation } from '../../constants/data';
 import {RestaurantType} from '../../constants/types';
 import {styles} from '../../styles';
 
@@ -8,10 +10,14 @@ const Restaurants: React.FC<{
   data: RestaurantType[];
   getCategoryName: (id: number) => string;
 }> = ({data, getCategoryName}) => {
+  const navigation = useNavigation();
   const renderItem = ({item}: {item: RestaurantType}) => {
     return (
       <TouchableOpacity
-        //onPress={} navigate to restaurant screen
+        onPress={() => navigation.navigate("Restaurant", {
+          item,
+          currentLocation: initialCurrentLocation
+        })}
         style={{
           marginBottom: SIZES.padding * 2,
         }}>
