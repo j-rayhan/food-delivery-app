@@ -26,6 +26,14 @@ export const SIZES = {
   padding: 10,
   padding2: 12,
 
+  sz60: 60,
+  sz50: 50,
+  sz40: 40,
+  sz30: 30,
+  sz25: 25,
+  sz20: 20,
+  sz15: 15,
+
   // font sizes
   largeTitle: 50,
   h1: 30,

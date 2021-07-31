@@ -1,5 +1,5 @@
-import { Image } from 'react-native';
-import { initialCurrentLocation, restaurantData } from './data';
+import {Image} from 'react-native';
+import {initialCurrentLocation, restaurantData} from './data';
 
 export type RootStackParamList = {
   NotFound: undefined;
@@ -40,8 +40,8 @@ export type OrderItemType = {
 export type RestaurantType = typeof restaurantData[1];
 
 export type MapRegionType = {
-  latitude: number,
-  longitude: number,
-  latitudeDelta: number,
+  latitude: number;
+  longitude: number;
+  latitudeDelta: number;
   longitudeDelta: number;
 };

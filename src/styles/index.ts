@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.lightGray4,
   },
+  container1: {
+    flex: 1,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -121,6 +124,20 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     flexDirection: 'row',
+  },
+  // Map view
+  mapButtonsContainer: {
+    position: 'absolute',
+    bottom: SIZES.height * 0.3,
+    right: SIZES.padding * 2,
+    width: 60,
+    height: 130,
+    justifyContent: 'space-between',
+  },
+  mapAbsoluteContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
   },
 });
 

@@ -68,7 +68,7 @@ const expensive = 3;
 const restaurantLatLong = {
   latitude: 23.85244050853382,
   longitude: 90.41247779208254,
-}
+};
 export const restaurantData = [
   {
     id: 1,
