@@ -45,6 +45,28 @@ const OrderDelivery = ({
     setRegion(mapRegion);
 
   }, [route]);
+  const handleZoon = (type: string) => {
+    let newRegion: MapRegionType = {
+      latitude: region?.latitude ?? 0,
+      longitude: region?.longitude ?? 0,
+      latitudeDelta: region?.latitudeDelta ?? 0,
+      longitudeDelta: region?.longitudeDelta ?? 0,
+    }
+    switch (type) {
+      case 'decrement':
+        newRegion.latitudeDelta = (region?.latitudeDelta ?? 0) * 2
+        newRegion.longitudeDelta = (region?.longitudeDelta ?? 0) * 2
+        break;
+      case 'increment':
+        newRegion.latitudeDelta = (region?.latitudeDelta ?? 0) / 2
+        newRegion.longitudeDelta = (region?.longitudeDelta ?? 0) / 2
+        break;
+      default:
+        break;
+    }
+    setRegion(newRegion);
+    mapViewRef.current.animateToRegion(newRegion, 200)
+  }
   const renderMap = () => {
     const destinationMarker = () => {
       return (
@@ -241,44 +263,88 @@ const OrderDelivery = ({
             <Text style={{ color: COLORS.darkgray, ...FONTS.body4 }}>{restaurant?.name}</Text>
           </View>
         </View>
-          {/* Buttons */}
-          <View style={[
-            { 
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: SIZES.padding }
-          ]}>
-            <TouchableOpacity
-              onPress={() => {navigation.navigate('Home')}}
-              style={[styles.center, {
-                height: 50,
-                flex: 1,
-                marginRight: SIZES.padding,
-                backgroundColor: COLORS.primary,
-                borderRadius: SIZES.padding
-              }]}>
-              <Text style={{ ...FONTS.h4, color: COLORS.white }}>Call</Text>
-            </TouchableOpacity>
+        {/* Buttons */}
+        <View style={[
+          {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: SIZES.padding
+          }
+        ]}>
+          <TouchableOpacity
+            onPress={() => { navigation.navigate('Home') }}
+            style={[styles.center, {
+              height: 50,
+              flex: 1,
+              marginRight: SIZES.padding,
+              backgroundColor: COLORS.primary,
+              borderRadius: SIZES.padding
+            }]}>
+            <Text style={{ ...FONTS.h4, color: COLORS.white }}>Call</Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() => {navigation.goBack()}}
-              style={[styles.center, {
-                height: 50,
-                flex: 1,
-                backgroundColor: COLORS.secondary,
-                borderRadius: SIZES.padding
-              }]}>
-              <Text style={{ ...FONTS.h4, color: COLORS.white }}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            onPress={() => { navigation.goBack() }}
+            style={[styles.center, {
+              height: 50,
+              flex: 1,
+              backgroundColor: COLORS.secondary,
+              borderRadius: SIZES.padding
+            }]}>
+            <Text style={{ ...FONTS.h4, color: COLORS.white }}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>)
+  }
+
+  const renderButtons = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          bottom: SIZES.height * 0.3,
+          right: SIZES.padding * 2,
+          width: 60,
+          height: 130,
+          justifyContent: 'space-between',
+        }}
+      >
+        {/* Zoom in */}
+        <TouchableOpacity
+          onPress={() => handleZoon('increment')}
+          style={[
+            styles.center,
+            {
+              width: 60,
+              height: 60,
+              borderRadius: 30,
+              backgroundColor: COLORS.white
+            }]}>
+          <Text style={FONTS.body1}>+</Text>
+        </TouchableOpacity>
+        {/* Zoom out */}
+        <TouchableOpacity
+          onPress={() => handleZoon('decrement')}
+          style={[
+            styles.center,
+            {
+              width: 60,
+              height: 60,
+              borderRadius: 30,
+              backgroundColor: COLORS.white
+            }]}>
+          <Text style={FONTS.body1}>-</Text>
+        </TouchableOpacity>
+      </View>
+    )
   }
   return (
     <View style={[styles.container]}>
       {renderMap()}
       {renderDestinationHeader()}
       {renderDeliveryInfo()}
+      {renderButtons()}
     </View>
   );
 };
