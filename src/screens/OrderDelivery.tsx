@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Image, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { MapViewProps, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { styles } from '../styles';
 import { RestaurantType, RootStackParamList, MapRegionType } from '../constants/types';
@@ -26,7 +26,7 @@ const OrderDelivery = ({
   const [fromLocation, setFromLocation] = React.useState<any | null>(null);
   const [toLocation, setToLocation] = React.useState<any | null>(null);
   const [region, setRegion] = React.useState<MapRegionType | undefined>(undefined);
-  const [duration, setDuration] = React.useState<number>(0)
+  const [duration, setDuration] = React.useState<number>(8)
   const [isReady, setReady] = React.useState<boolean>(false)
   const [angle, setAngle] = React.useState<number>(0)
   React.useEffect(() => {
@@ -146,9 +146,139 @@ const OrderDelivery = ({
       </View>
     )
   }
+  const renderDestinationHeader = () => {
+    return (<View
+      style={[
+        styles.center,
+        {
+          position: 'absolute',
+          top: 50,
+          height: 50,
+          left: 0,
+          right: 0
+        }
+      ]}
+    >
+      <View
+        style={[
+          styles.row,
+          {
+            width: SIZES.width * 0.9,
+            paddingVertical: SIZES.padding,
+            paddingHorizontal: SIZES.padding * 2,
+            borderRadius: SIZES.radius,
+            backgroundColor: COLORS.white
+          }]}
+      >
+        <Image
+          source={icons.red_pin}
+          style={{
+            width: 30,
+            height: 30,
+            marginRight: SIZES.padding
+          }}
+        />
+        <View style={{ flex: 1 }}>
+          <Text style={{ ...FONTS.body3 }}>{strateName}</Text>
+        </View>
+        <Text style={{ ...FONTS.body3 }}>{Math.ceil(duration)} mins</Text>
+
+      </View>
+    </View>)
+  }
+  const renderDeliveryInfo = () => {
+    return (<View
+      style={[
+        styles.center,
+        {
+          position: 'absolute',
+          bottom: 50,
+          left: 0,
+          right: 0
+        }
+      ]}
+    >
+      <View
+        style={[
+          {
+            width: SIZES.width * 0.9,
+            paddingVertical: SIZES.padding * 3,
+            paddingHorizontal: SIZES.padding * 2,
+            borderRadius: SIZES.radius,
+            backgroundColor: COLORS.white
+          }]}
+      >
+        <View
+          style={[
+            styles.row
+          ]}
+        >
+          <Image
+            source={restaurant?.courier.avatar}
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 25
+            }}
+          />
+          <View style={{ flex: 1, marginLeft: SIZES.padding }}>
+            {/* name & rating */}
+            <View style={[styles.rowSpread]}>
+              <Text style={{ ...FONTS.h4 }}>{restaurant?.courier.name}</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Image
+                  source={icons.star}
+                  style={{
+                    width: 18,
+                    height: 18,
+                    tintColor: COLORS.primary,
+                    marginRight: SIZES.padding
+                  }}
+                />
+                <Text style={{ ...FONTS.body3 }}>{restaurant?.rating}</Text>
+              </View>
+            </View>
+            <Text style={{ color: COLORS.darkgray, ...FONTS.body4 }}>{restaurant?.name}</Text>
+          </View>
+        </View>
+          {/* Buttons */}
+          <View style={[
+            { 
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginTop: SIZES.padding }
+          ]}>
+            <TouchableOpacity
+              onPress={() => {navigation.navigate('Home')}}
+              style={[styles.center, {
+                height: 50,
+                flex: 1,
+                marginRight: SIZES.padding,
+                backgroundColor: COLORS.primary,
+                borderRadius: SIZES.padding
+              }]}>
+              <Text style={{ ...FONTS.h4, color: COLORS.white }}>Call</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {navigation.goBack()}}
+              style={[styles.center, {
+                height: 50,
+                flex: 1,
+                backgroundColor: COLORS.secondary,
+                borderRadius: SIZES.padding
+              }]}>
+              <Text style={{ ...FONTS.h4, color: COLORS.white }}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+      </View>
+    </View>)
+  }
   return (
     <View style={[styles.container]}>
       {renderMap()}
+      {renderDestinationHeader()}
+      {renderDeliveryInfo()}
     </View>
   );
 };
